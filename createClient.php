@@ -58,14 +58,14 @@
         throwErrors("THE EMAIL FIELD MUST NOT OT BE EMPTY ", $ERRORS[0], 0);
       }
 
-      if (strlen($fieldThree) !== 0) {
+      if ($fieldThree !== "") {
         $fieldThree = implode("-", array_reverse(explode("/", $fieldThree)));
       }
 
-      if (strlen($fieldFour) !== 0) {
+      if ($fieldFour !== "") {
         $fieldFour = clearStrings($fieldFour);
-        if (strlen($fieldFour) > 11) {
-          throwErrors("THE NUMBER OF CHARACTERS HAS BEEN EXCEEDED", $ERRORS[2], 2);
+        if (strlen($fieldFour) > 11 || strlen($fieldFour) < 11) {
+          throwErrors("THE VALUE PUT IN IS INVALID", $ERRORS[2], 2);
         }
       }
     }
@@ -92,10 +92,10 @@
     <div class="container bg-danger">
       <div class="row d-flex flex-column">
         <div class="col-sm-6 d-flex bg-danger flex-column ">
-          <input type="text" name="name" id="inputName" placeholder="Nome" />
-          <input type="text" name="email" id="inputEmail" placeholder="Email" />
-          <input type="text" name="cel" id="inputTel" placeholder="(00) 99999-8888" />
-          <input type="text" name="birthday" id="inputNascimento" placeholder="00/00/0000" />
+          <input type="text" value="<?php if(isset($_POST["name"])) echo $_POST["name"]; ?>" name="name" id="inputName" placeholder="Nome" />
+          <input type="text" value="<?php if(isset($_POST["email"])) echo $_POST["email"]; ?>" name="email" id="inputEmail" placeholder="Email" />
+          <input type="text" value="<?php if(isset($_POST["cel"])) echo $_POST["cel"]; ?>" name="cel" id="inputTel" placeholder="(00) 99999-8888" />
+          <input type="text" value="<?php if(isset($_POST["birthday"])) echo $_POST["birthday"]; ?>" name="birthday" id="inputNascimento" placeholder="00/00/0000" />
         </div>
         <div class="col-sm-6">
           <button class="btn bg-info" type="submit">Criar cliente</button>
